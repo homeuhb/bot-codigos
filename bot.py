@@ -6,7 +6,7 @@ import threading
 import os
 from flask import Flask
 
-# 1. TUS DATOS VITALES (Vuelve a pegarlos aquí)
+# 1. TUS DATOS VITALES
 TOKEN = '8529679226:AAGVia7XKEL8OCStxrJLcoCJsVUfaGrFvbI'
 MI_CORREO = 'homehubgeminiplus2026@gmail.com'
 MI_CLAVE_APP = 'stje qwma xgbw jesn'
@@ -18,10 +18,10 @@ app = Flask(__name__)
 usuarios_autorizados = {
     7517314702: {
         "nombre": "William Santa Croz Del",
-        "😎cliente": "True",
-        "🎫cuentas": "disney, netflix, gemini",
-        "⏰expiracion": "Sin límite",
-        "correos": ["correo_disney@gmail.com", "correo_netflix@gmail.com", "homehubgeminiplus2026@gmail.com"],
+        "cliente": "True",
+        "cuentas": "disney, netflix, gemini",
+        "expiracion": "Sin límite",
+        "correos": ["correo_disney@gmail.com", "correo_netflix@gmail.com"]
     }
 }
 
@@ -36,6 +36,7 @@ asuntos_permitidos = {
     'gpt': ['openai', 'chatgpt'],
     'spotify': ['spotify'],
     'apple': ['apple', 'id de apple'],
+    'gemini': ['gemini', 'google', 'verificación de google'],
     'link': ['restablecer', 'password', 'enlace', 'link']
 }
 
@@ -109,24 +110,24 @@ def validar_y_procesar(message, plataforma, tipo_busqueda='codigo'):
     else:
         bot.reply_to(message, "🚫 No estás registrado como cliente autorizado.")
 
-# --- COMANDOS /start Y /info FUSIONADOS CON LA PLANTILLA EXACTA ---
+# --- COMANDOS /start Y /info FUSIONADOS Y CON EMOJIS ---
 @bot.message_handler(commands=['start', 'info'])
 def info_start(message):
     id_user = message.from_user.id
     if id_user in usuarios_autorizados:
         u = usuarios_autorizados[id_user]
-        txt = (f"INFO\n"
-               f"Username: {u['nombre']}\n"
-               f"ID: {id_user} CLIENTE: {u['cliente']} Cuentas: {u['cuentas']} Expiración: {u['expiracion']}")
+        txt = (f"🚀🍿 INFO\n"
+               f"🔥 Username: {u['nombre']}\n"
+               f"⚡ ID: {id_user} 🗂️ CLIENTE: {u['cliente']} 🌐 Cuentas: {u['cuentas']} 👉 Expiración: {u['expiracion']}")
     else:
         nombre_telegram = f"{message.from_user.first_name} {message.from_user.last_name or ''}".strip()
-        txt = (f"INFO\n"
-               f"Username: {nombre_telegram}\n"
-               f"ID: {id_user} CLIENTE: False Cuentas: Ninguna Expiración: No registrado\n\n"
+        txt = (f"🚀🍿 INFO\n"
+               f"🔥 Username: {nombre_telegram}\n"
+               f"⚡ ID: {id_user} 🗂️ CLIENTE: False 🌐 Cuentas: Ninguna 👉 Expiración: No registrado\n\n"
                f"*(Usa /cmd para ver los comandos)*")
     bot.reply_to(message, txt, parse_mode="Markdown")
 
-# --- NUEVO COMANDO /cmd ---
+# --- NUEVO COMANDO /cmd ACTUALIZADO ---
 @bot.message_handler(commands=['cmd'])
 def cmd_lista(message):
     guia = (
@@ -146,7 +147,8 @@ def cmd_lista(message):
         "/crunchy CORREO — **Obtiene LINK** de Crunchyroll si no existe OTP (requiere autorización)\n"
         "/gpt CORREO — Consultar CÓDIGO ChatGPT (requiere autorización)\n"
         "/spotify CORREO — Código de inicio; si no hay OTP, intenta devolver LINK (requiere autorización)\n"
-        "/apple CORREO — Código de verificación de Apple (requiere autorización)"
+        "/apple CORREO — Código de verificación de Apple (requiere autorización)\n"
+        "/gemini CORREO — Consultar CÓDIGO Gemini (requiere autorización)"
     )
     bot.reply_to(message, guia, parse_mode="Markdown")
 
@@ -159,7 +161,7 @@ def ver_cuentas(message):
     else:
         bot.reply_to(message, "🚫 No tienes cuentas asignadas.")
 
-# MAPEO DE PLATAFORMAS
+# MAPEO DE PLATAFORMAS INCLUYENDO GEMINI
 @bot.message_handler(commands=['netflix'])
 def cmd_netflix(message): validar_y_procesar(message, 'netflix', 'codigo')
 @bot.message_handler(commands=['disney'])
@@ -180,6 +182,8 @@ def cmd_gpt(message): validar_y_procesar(message, 'gpt', 'codigo')
 def cmd_spotify(message): validar_y_procesar(message, 'spotify', 'codigo')
 @bot.message_handler(commands=['apple'])
 def cmd_apple(message): validar_y_procesar(message, 'apple', 'codigo')
+@bot.message_handler(commands=['gemini'])
+def cmd_gemini(message): validar_y_procesar(message, 'gemini', 'codigo')
 
 @bot.message_handler(commands=['hogar'])
 def cmd_hogar(message):
@@ -198,7 +202,8 @@ def cmd_link(message):
     validar_y_procesar(message, 'link', 'link')
 
 @app.route('/')
-def home(): return "🚀 Sistema Activo"
+def home(): return "🚀 Sistema Multi-Plataforma Activo"
+
 if __name__ == '__main__':
     threading.Thread(target=lambda: bot.infinity_polling()).start()
     app.run(host="0.0.0.0", port=int(os.environ.get('PORT', 10000)))
