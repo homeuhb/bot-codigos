@@ -18,7 +18,8 @@ app = Flask(__name__)
 # Formato: "usuario_de_telegram": ['correo1@gmail.com', 'correo2@gmail.com']
 usuarios_autorizados = {
     "juanito_perez": ['netflix_cliente@gmail.com', 'gpt_cliente@gmail.com'],
-    "maria_lopez": ['max_cliente@gmail.com']
+    "maria_lopez": ['max_cliente@gmail.com'],
+    "Willion_9": ['homehubgeminiplus2026@gmail.com']
 }
 
 # --- LA MAGIA PARA LEER CORREOS (IMAP) ---
