@@ -19,9 +19,14 @@ usuarios_autorizados = {
     7517314702: {
         "nombre": "William Santa Croz Del",
         "cliente": "True",
-        "cuentas": "disney, netflix, gemini",
+        "cuentas": "disney, netflix, gemini, amazon",
         "expiracion": "Sin límite",
-        "correos": ["correo_disney@gmail.com", "correo_netflix@gmail.com", "homehubgeminiplus2026@gmail.com"]
+        "correos": [
+            "correo_disney@gmail.com", 
+            "correo_netflix@gmail.com", 
+            "streamyotu22@gmail.com",
+            "homehubgeminiplus2026@gmail.com" # Agregaste el correo aquí (fíjate en la coma del anterior)
+        ]
     }
 }
 
