@@ -21,7 +21,7 @@ usuarios_autorizados = {
         "cliente": "True",
         "cuentas": "disney, netflix, gemini",
         "expiracion": "Sin límite",
-        "correos": ["correo_disney@gmail.com", "correo_netflix@gmail.com", "homehubgeminiplus2026@gmail.com]
+        "correos": ["correo_disney@gmail.com", "correo_netflix@gmail.com", "homehubgeminiplus2026@gmail.com"]
     }
 }
 
